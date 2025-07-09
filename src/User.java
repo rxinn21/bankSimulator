@@ -1,5 +1,7 @@
+//when introducing a class like this, match every single element to the one in the CSV file in the EXACT same order, or the CSV file will not be read correctly
+
+
 public class User {
-    public String accMoney;
     public String accNum;
     public String firstName;
     public String lastName;
@@ -9,10 +11,10 @@ public class User {
     public String phoneNum;
     public String accIdentifier;
     public String accType;
+    public String accMoney;
     public String dateCreated;
 
-    public User(String accMoney, String accNum, String firstName, String lastName, String username, String password, String email, String phoneNum, String accIdentifier, String accType, String dateCreated) {
-        this.accMoney = accMoney; //have to use parseint
+    public User(String accNum, String firstName, String lastName, String username, String password, String email, String phoneNum, String accIdentifier, String accType, String accMoney, String dateCreated) {
         this.accNum = accNum;// have to use parseint
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,6 +24,7 @@ public class User {
         this.phoneNum = phoneNum;
         this.accIdentifier = accIdentifier;
         this.accType = accType;
+        this.accMoney = accMoney; //have to use parseint
         this.dateCreated = dateCreated;
     }
 
@@ -29,8 +32,8 @@ public class User {
         this.accMoney = accMoney;
     }
 
-    public int getAccMoney() {
-        return Integer.parseInt(accMoney);
+    public double getAccMoney() {
+        return Double.parseDouble(accMoney);
     }
 
     public void setAccNum(String accNum) {
@@ -89,7 +92,7 @@ public class User {
         return phoneNum;
     }
 
-    public void setAccIdentifier(String accIdnetifier) {
+    public void setAccIdentifier(String accIdentifier) {
         this.accIdentifier = accIdentifier;
     }
 

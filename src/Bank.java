@@ -6,27 +6,51 @@ public class Bank {
 
     public int numMoneyInChecking = 0;
     public int numMoneyInSavings = 0;
-    ArrayList<User> user1 = Login.loadUsers();
-    public ArrayList<User> loadUsers = Login.loadUsers();
+    ArrayList<User> loadUsers = Login.loadUsers();
     public User currentUser = null;
-    //public User currentUser = new User(null, null, null, null, null, null, null, null, null, null, null);
+
+    public Bank(User currentUser, ArrayList<User> loadUsers) {
+        this.currentUser = currentUser;
+        this.loadUsers = loadUsers;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public ArrayList<User> getLoadUsers() {
+        return loadUsers;
+    }
+
+    public void setLoadUsers(ArrayList<User> loadUsers) {
+        this.loadUsers = loadUsers;
+    }
+
+    public void currentUser() {
+        System.out.println("Logged in as " + currentUser.getFirstName() + " " + currentUser.getLastName());
+    }
 
     public void primaryAccount() { //viewing primary acc
         try (Scanner scan = new Scanner(System.in)) {
-            Bank bank = new Bank();
-            System.out.print("The amount of money in your account is: " + currentUser.getAccMoney());
+            System.out.println("The amount of money in your account is: " + currentUser.getAccMoney());
 
             System.out.print("Would you like to view your account information? ");
             String choice = scan.nextLine();
 
             if(choice.equalsIgnoreCase("yes")) {
-                bank.viewAccInformation();
+                viewAccInformation();
             } else if (choice.equalsIgnoreCase("no")) {
                 System.out.println("Returning to home screen... ");
             } else {
                 System.out.println("Error, please try again. ");
                 return;
             }
+        } catch (NoSuchElementException | NullPointerException e) {
+            System.out.println("Error, please try again. Error in Bank.java");
         }
     }
 
@@ -42,13 +66,16 @@ public class Bank {
             if(answer.equalsIgnoreCase("Checking")) {
                 numMoneyInChecking -= amtWithdraw;
                 System.out.println("Checking account balance: " + numMoneyInChecking);
+                System.exit(0);
             } else {
                 numMoneyInSavings -= amtWithdraw;
                 System.out.println("Savings account balance: " + numMoneyInSavings);
+                System.exit(0);
             }
 
             System.out.println();
             System.out.println("Account balance: " + currentUser.getAccMoney());
+            System.exit(0);
         }
         scan.close();
     }
@@ -62,28 +89,34 @@ public class Bank {
             if(answer.equalsIgnoreCase("Checking")) {
                 numMoneyInChecking += amtDeposit;
                 System.out.println("Checking account balance: " + numMoneyInChecking);
+                System.exit(0);
             } else {
                 numMoneyInSavings += amtDeposit;
                 System.out.println("Savings account balance: " + numMoneyInSavings);
+                System.exit(0);
             }
         }
 
         System.out.println();
         System.out.println("Account balance: " + currentUser.getAccMoney());
+        System.exit(0);
         scan.close();
     }
 
     public void viewAccBalances() {
         //User currentUser = new User(null, null, null, null, null, null, null, null, null, null, null)
         System.out.println("Account balance: " + currentUser.getAccMoney());
+        System.exit(0);
     }
 
     public void viewChecking() {
         System.out.println("Checking account balance: " + numMoneyInChecking);
+        System.exit(0);
     }
 
     public void viewSavings() {
         System.out.println("Savings account balance: " + numMoneyInSavings);
+        System.exit(0);
     }
 
     public void viewAccInformation() {
@@ -107,15 +140,6 @@ public class Bank {
 
             //-----the print statements are returning null-----
 
-            System.out.println();
-            System.out.println("Would you like to return to the main menu?");
-            String choice = scan.nextLine();
-
-            if(choice.equalsIgnoreCase("Yes")) {
-                return;
-            } else {
-                System.out.println("Staying on this menu ...");
-            }
         } catch(NoSuchElementException e) {
             System.out.println("Element does not exist. Try again.");
         }
