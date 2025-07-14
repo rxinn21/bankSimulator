@@ -37,7 +37,7 @@ public class Bank {
 
     public void primaryAccount() { //viewing primary acc
         try {
-            System.out.println("The amount of money in your account is: $" + currentUser.getAccMoney());
+            System.out.println("The amount of money in your account is: $" + numMoneyInAcc);
 
             System.out.print("Would you like to view your account information? ");
             String choice = scan.nextLine();
@@ -62,37 +62,31 @@ public class Bank {
             System.out.println("Insufficient funds");
         } else {
             numMoneyInAcc -= amtWithdraw;
+            System.out.println("You withdrew $" + amtWithdraw);
         }
 
         System.out.println();
-        System.out.println("Account balance: " + currentUser.getAccMoney());
-        System.exit(0);
+        System.out.println("Account balance: " + numMoneyInAcc);
     }
+
+    //need to make it so that the account balance updates and doesn't stay stagnant. ex: if you deposit 1k and ur balance is 9k, then when you withdraw it should be 8k again not 7k
 
     public void accDeposit(int amtDeposit) {
         if(amtDeposit > 0) {
             numMoneyInAcc += amtDeposit;
+            System.out.println("Deposited $" + amtDeposit);
         } else {
             System.out.println("Insufficient funds");
         }
 
         System.out.println();
-        System.out.println("Account balance: " + currentUser.getAccMoney());
-        System.exit(0);
-        scan.close();
+        System.out.println("Account balance: $" + numMoneyInAcc);
     }
 
     public void viewAccBalances() {
         //User currentUser = new User(null, null, null, null, null, null, null, null, null, null, null)
-        System.out.println("Account balance: " + currentUser.getAccMoney());
-        System.exit(0);
-    }
-
-    public void viewAccBalance() {
         System.out.println("Account balance: " + numMoneyInAcc);
-        System.exit(0);
     }
-
 
     public void viewAccInformation() {
 

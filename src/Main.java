@@ -19,36 +19,41 @@ public class Main {
 
                 bank = new Bank(loggedUser, userList);
                 System.out.println();
-                System.out.println("Logged in as " + loggedUser.getFirstName() + " " + loggedUser.getLastName());
-                System.out.println();
 
-                System.out.println("Please select one of these options: ");
-                System.out.println("------------------xx-----------------");
-                System.out.println("1. Deposit money");
-                System.out.println("2. Withdraw money");
-                System.out.println("3. View account balances");
-                System.out.println("4. View account information");
-                System.out.println("5. Log out");
-                System.out.println("------------------xx-----------------");
-
-                //--------menu configurations--------
-
-                System.out.println();
-                System.out.print("Enter the number that you would like to select: ");
                 int choice = 0;
+                boolean running = true;
 
-                while (choice != 5) { //while statement to let the user make a choice
+                while (running) { //while statement to let the user make a choice
+
+                    System.out.println();
+                    System.out.println("Logged in as " + loggedUser.getFirstName() + " " + loggedUser.getLastName());
+                    System.out.println();
+
+                    System.out.println("Please select one of these options: ");
+                    System.out.println("------------------xx-----------------");
+                    System.out.println("1. Deposit money");
+                    System.out.println("2. Withdraw money");
+                    System.out.println("3. View account balances");
+                    System.out.println("4. View account information");
+                    System.out.println("5. Log out");
+                    System.out.println("------------------xx-----------------");
+
+                    //--------menu configurations--------
+
+                    System.out.println();
+                    System.out.print("Enter the number that you would like to select: ");
                     bank = new Bank(loggedUser, userList);
                     choice = scan.nextInt();
                     String back;
                     switch (choice) { //fix program immediately exiting without waiting for user input (07.08)
                         case 1:
-                            System.out.println("Enter the amount to deposit: ");
+                            System.out.print("Enter the amount to deposit: $");
                             int depositAmt = scan.nextInt();
                             bank.accDeposit(depositAmt);
 
                             System.out.println();
-                            System.out.println("Would you like to go back to the main menu? (Y/N)");
+                            scan.nextLine();
+                            System.out.print("Would you like to go back to the main menu? (Y/N) ");
                             back = scan.nextLine();
                             if(back.equalsIgnoreCase("Y")) {
                                 break;
@@ -56,13 +61,15 @@ public class Main {
                                 System.out.println("Thank you for logging in. See you soon!");
                                 System.exit(0);
                             }
+
                         case 2:
-                            System.out.println("Enter the amount to withdraw");
+                            System.out.print("Enter the amount to withdraw: $");
                             int withdrawAmt = scan.nextInt();
                             bank.accWithdraw(withdrawAmt);
 
                             System.out.println();
-                            System.out.println("Would you like to go back to the main menu? (Y/N)");
+                            scan.nextLine();
+                            System.out.print("Would you like to go back to the main menu? (Y/N) ");
                             back = scan.nextLine();
                             if(back.equalsIgnoreCase("Y")) {
                                 break;
@@ -70,11 +77,13 @@ public class Main {
                                 System.out.println("Thank you for logging in. See you soon!");
                                 System.exit(0);
                             }
+
                         case 3:
                             bank.viewAccBalances();
 
                             System.out.println();
-                            System.out.println("Would you like to go back to the main menu? (Y/N)");
+                            scan.nextLine();
+                            System.out.print("Would you like to go back to the main menu? (Y/N) ");
                             back = scan.nextLine();
                             if(back.equalsIgnoreCase("Y")) {
                                 break;
@@ -82,11 +91,13 @@ public class Main {
                                 System.out.println("Thank you for logging in. See you soon!");
                                 System.exit(0);
                             }
+
                         case 4:
                             bank.primaryAccount();
 
                             System.out.println();
-                            System.out.println("Would you like to go back to the main menu? (Y/N)");
+                            scan.nextLine();
+                            System.out.print("Would you like to go back to the main menu? (Y/N) ");
                             back = scan.nextLine();
                             if(back.equalsIgnoreCase("Y")) {
                                 break;
@@ -94,8 +105,10 @@ public class Main {
                                 System.out.println("Thank you for logging in. See you soon!");
                                 System.exit(0);
                             }
+
                         case 5:
                             System.out.println("Logging out..");
+                            running = false;
                             break;
                     }
                 }
