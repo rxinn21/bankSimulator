@@ -4,14 +4,15 @@ import java.util.Scanner;
 
 public class Bank {
 
-    public int numMoneyInChecking = 0;
-    public int numMoneyInSavings = 0;
+    public Scanner scan = new Scanner(System.in);
+    public double numMoneyInAcc;
     ArrayList<User> loadUsers = Login.loadUsers();
     public User currentUser = null;
 
     public Bank(User currentUser, ArrayList<User> loadUsers) {
         this.currentUser = currentUser;
         this.loadUsers = loadUsers;
+        numMoneyInAcc = currentUser.getAccMoney();
     }
 
     public void setCurrentUser(User currentUser) {
@@ -35,8 +36,8 @@ public class Bank {
     }
 
     public void primaryAccount() { //viewing primary acc
-        try (Scanner scan = new Scanner(System.in)) {
-            System.out.println("The amount of money in your account is: " + currentUser.getAccMoney());
+        try {
+            System.out.println("The amount of money in your account is: $" + currentUser.getAccMoney());
 
             System.out.print("Would you like to view your account information? ");
             String choice = scan.nextLine();
@@ -57,44 +58,22 @@ public class Bank {
     //have to check if the user has checking or savings account
     public void accWithdraw(int amtWithdraw) {
         //User currentUser = new User(null, null, null, null, null, null, null, null, null, null, null);
-        Scanner scan = new Scanner(System.in);
         if(currentUser.getAccMoney() < 0) {
             System.out.println("Insufficient funds");
         } else {
-            System.out.println("Where would you like to withdraw funds from?");
-            String answer = scan.nextLine();
-            if(answer.equalsIgnoreCase("Checking")) {
-                numMoneyInChecking -= amtWithdraw;
-                System.out.println("Checking account balance: " + numMoneyInChecking);
-                System.exit(0);
-            } else {
-                numMoneyInSavings -= amtWithdraw;
-                System.out.println("Savings account balance: " + numMoneyInSavings);
-                System.exit(0);
-            }
-
-            System.out.println();
-            System.out.println("Account balance: " + currentUser.getAccMoney());
-            System.exit(0);
+            numMoneyInAcc -= amtWithdraw;
         }
-        scan.close();
+
+        System.out.println();
+        System.out.println("Account balance: " + currentUser.getAccMoney());
+        System.exit(0);
     }
 
     public void accDeposit(int amtDeposit) {
-        //User currentUser = new User(null, null, null, null, null, null, null, null, null, null, null)
-        Scanner scan = new Scanner(System.in);
         if(amtDeposit > 0) {
-            System.out.println("Do you want to deposit to Checking or Savings?");
-            String answer = scan.nextLine();
-            if(answer.equalsIgnoreCase("Checking")) {
-                numMoneyInChecking += amtDeposit;
-                System.out.println("Checking account balance: " + numMoneyInChecking);
-                System.exit(0);
-            } else {
-                numMoneyInSavings += amtDeposit;
-                System.out.println("Savings account balance: " + numMoneyInSavings);
-                System.exit(0);
-            }
+            numMoneyInAcc += amtDeposit;
+        } else {
+            System.out.println("Insufficient funds");
         }
 
         System.out.println();
@@ -109,24 +88,15 @@ public class Bank {
         System.exit(0);
     }
 
-    public void viewChecking() {
-        System.out.println("Checking account balance: " + numMoneyInChecking);
+    public void viewAccBalance() {
+        System.out.println("Account balance: " + numMoneyInAcc);
         System.exit(0);
     }
 
-    public void viewSavings() {
-        System.out.println("Savings account balance: " + numMoneyInSavings);
-        System.exit(0);
-    }
 
     public void viewAccInformation() {
-        //when viewing account information, it shows the money in the account and then asks the question of viewing the acc info
 
-        // remove that^^ and instead just show account information
-        // it outputs null for the elements
-        // NoSuchElementException at the end of execution for this method
-
-        try(Scanner scan = new Scanner(System.in)) {
+        try {
             System.out.println();
             System.out.println("------------------------");
             System.out.println(currentUser.getFirstName() + " " + currentUser.getLastName());

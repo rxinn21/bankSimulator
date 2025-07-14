@@ -49,15 +49,13 @@ public class Main {
 
                             System.out.println();
                             System.out.println("Would you like to go back to the main menu? (Y/N)");
-                            back = scan.next();
+                            back = scan.nextLine();
                             if(back.equalsIgnoreCase("Y")) {
                                 break;
                             } else {
                                 System.out.println("Thank you for logging in. See you soon!");
                                 System.exit(0);
                             }
-
-                            break;
                         case 2:
                             System.out.println("Enter the amount to withdraw");
                             int withdrawAmt = scan.nextInt();
@@ -65,7 +63,7 @@ public class Main {
 
                             System.out.println();
                             System.out.println("Would you like to go back to the main menu? (Y/N)");
-                            back = scan.next();
+                            back = scan.nextLine();
                             if(back.equalsIgnoreCase("Y")) {
                                 break;
                             } else {
@@ -77,7 +75,7 @@ public class Main {
 
                             System.out.println();
                             System.out.println("Would you like to go back to the main menu? (Y/N)");
-                            back = scan.next();
+                            back = scan.nextLine();
                             if(back.equalsIgnoreCase("Y")) {
                                 break;
                             } else {
@@ -89,7 +87,7 @@ public class Main {
 
                             System.out.println();
                             System.out.println("Would you like to go back to the main menu? (Y/N)");
-                            back = scan.next();
+                            back = scan.nextLine();
                             if(back.equalsIgnoreCase("Y")) {
                                 break;
                             } else {
