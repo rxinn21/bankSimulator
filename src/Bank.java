@@ -39,16 +39,16 @@ public class Bank {
         try {
             System.out.println("The amount of money in your account is: $" + numMoneyInAcc);
 
-            System.out.print("Would you like to view your account information? ");
+            System.out.println();
+            System.out.print("Would you like to view your account information? (Y/N): ");
             String choice = scan.nextLine();
 
-            if(choice.equalsIgnoreCase("yes")) {
+            if(choice.equalsIgnoreCase("y")) {
                 viewAccInformation();
-            } else if (choice.equalsIgnoreCase("no")) {
+            } else if (choice.equalsIgnoreCase("n")) {
                 System.out.println("Returning to home screen... ");
             } else {
                 System.out.println("Error, please try again. ");
-                return;
             }
         } catch (NoSuchElementException | NullPointerException e) {
             System.out.println("Error, please try again. Error in Bank.java");
@@ -57,7 +57,6 @@ public class Bank {
 
     //have to check if the user has checking or savings account
     public void accWithdraw(int amtWithdraw) {
-        //User currentUser = new User(null, null, null, null, null, null, null, null, null, null, null);
         if(currentUser.getAccMoney() < 0) {
             System.out.println("Insufficient funds");
         } else {
